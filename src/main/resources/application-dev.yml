@@ -1,0 +1,32 @@
+# https://www.javatpoint.com/components-of-spring-cloud
+# https://www.baeldung.com/spring-cloud-bootstrapping
+# https://www.tutorialspoint.com/spring_cloud/spring_cloud_gateway.htm
+# https://www.baeldung.com/spring-cloud-netflix-eureka
+# https://cloud.spring.io/spring-cloud-netflix/multi/multi_spring-cloud-eureka-server.html
+# https://howtodoinjava.com/spring-cloud/spring-cloud-service-discovery-netflix-eureka/
+server:
+  port: ${PORT:8761} # Indicate the default PORT where this service will be started
+spring:
+  application:
+    name: stock-analyzer-discovery
+  config:
+    import: optional:configserver:${CONFIG_SERVER_URL:http://localhost:8888/}
+eureka:
+  instance:
+    hostname: ${DISCOVERY_INSTANCE_HOSTNAME:localhost}
+    # prefer-ip-address: true
+    # lease-expiration-duration-in-seconds: 15
+    # lease-renewal-interval-in-seconds: 10
+  client:
+    # eureka-server-connect-timeout-seconds: 15
+    enabled: true
+    registerWithEureka: false
+    fetchRegistry: false
+  server:
+    # enable-self-preservation: false
+    waitTimeInMsWhenSyncEmpty: 0  #wait time for subsequent sync
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
