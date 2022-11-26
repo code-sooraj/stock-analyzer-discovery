@@ -1,0 +1,5 @@
+spring:
+  cloud:
+    config:
+      name: stock-analyzer-discovery
+      uri: ${SA_CONFIG_SERVER_URI:http://localhost:8888}
